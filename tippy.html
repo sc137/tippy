@@ -1,0 +1,156 @@
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+ <head>
+ <style>
+  	html, body { 
+ 		font-size: 22pt;
+ 		color: #1b1b1b; 
+ 		margin: 0 10px 0 10px;
+ 	}	
+ 	p {
+	 	font-size: .9em;
+ 	}
+	#header {
+		height: 12pt;
+		background-color: #242323;
+		position: relative;
+		margin: -8px -10px 2pt -10px;
+	}
+	#textarea {
+		position: relative;
+		width: 100%;
+		}
+	#pay {
+		font-weight: 400;
+		font-size: 1.2em;
+		text-align: center;
+	}
+	#logo {
+		position: relative;
+		float: right;
+		margin-right: 25px;
+	}
+ 	strong { font-size: 1.1em; }
+ 	form {
+	 	margin-top: 10pt;
+ 	}
+ 	select, input, button {
+	   display: block;
+	   margin-bottom: .2em;
+	   font-size: 100%;
+	}
+ </style>
+  
+ <title>Give Good Tips with ...tippy!</title>
+ 
+ <!-- 
+ 	Tippy is an all-in-one mobile app using html, javascript, and jQuery mobile. 
+ 	All the styling and code are on this single page.
+ 	You are authorized to use this for educational purposes.
+ 	By Sable Cantus
+ -->
+ 
+ <meta name="viewport" content="width=device-width, initial-scale=1"> 
+<link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.1/jquery.mobile-1.2.1.min.css" />
+<script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
+<script src="http://code.jquery.com/mobile/1.2.1/jquery.mobile-1.2.1.min.js"></script>
+<script type="application/javascript">
+  function draw() {
+    var ctx = document.getElementById('logo').getContext('2d');
+    for (var i = 0; i < 9; i++){
+      ctx.lineWidth = 1+i;
+      ctx.beginPath();
+      ctx.moveTo(2+i*12,5);
+      ctx.lineTo(2+i*12,25);
+      ctx.stroke();
+    }
+    ctx.font = "12pt Helvetica";
+    ctx.fillText("...tippy", 50, 42);
+  }
+  
+  <!-- 
+	function SelectTheText(fieldName){ 
+		fieldName.focus(); 
+		fieldName.select(); 
+		} 
+	--> 
+  
+  </script>
+ </head>
+
+ <body id="textarea" onload="draw();">
+ <div data-role="page">
+  <div id="header"></div>
+   
+<!--    <div id="canvas"><canvas id="logo" width="100" height="65"></canvas></div>     -->
+   <form name="tipper">
+	How much is the bill?
+	<br />
+	<input type="number" name="billInput" placeholder="enter bill amount" onclick="document.forms.tipper.billInput.value=''">
+
+	What % for the tip?
+	<br />
+	<input type="range" name="tipInput"  value="20" min="10" max="30" data-highlight="true" onclick="SelectTheText(document.forms.tipper.tipInput);">
+	<input type="button" value="Tip Big!" onclick="tipBig();">
+</form>
+   </form>
+   <a name="result"></a>
+   <p id="result"></p>
+   
+<div id="split" style="display: none;">
+   <hr />
+   <form name="split">
+   	
+   	<div data-role="fieldcontain">
+   	<label for="splitInput">Split the bill?</label>
+   	<br />
+   	<input type="range" name="splitInput" value="1" min="1" max="25" onchange="splitBill();" data-highlight="true"></div>
+   <p id="splitResult"></p>
+   <br />
+   <br />
+   <br />
+   <br />
+   <br />
+   </form>
+</div>
+
+<script>
+	var tip = document.forms.tipper.tipInput.value;
+	var bill = document.forms.tipper.billInput.value;
+
+	function tipBig() {
+		if ( isNaN(document.forms.tipper.billInput.value) || !document.forms.tipper.billInput.value ) { 
+			alert("Please enter the bill amount."); 
+			} else { 	
+			var tip = document.forms.tipper.tipInput.value;
+			var bill = document.forms.tipper.billInput.value;
+			tipAmount = parseFloat(bill) * (parseFloat(tip)/100);
+			totalBill = parseFloat(bill) + tipAmount;
+			result = "<p id='pay'>Pay <strong>$";
+			result += Math.ceil(parseFloat(totalBill)).toFixed(0) + "</strong></p>";
+			result += "The tip is $";
+			result += parseFloat(tipAmount).toFixed(2);
+			result += "<br />The bill is $";
+			result += parseFloat(totalBill).toFixed(2);
+
+			document.getElementById('result').innerHTML = result;
+			document.getElementById('split').style.display="inline";
+			console.log(tipAmount, totalBill);
+			}
+			jumpToResult();
+		}
+	
+	function jumpToResult() {
+		window.location.hash='#result';
+	}
+		
+	function splitBill() {
+		var numPeople = document.forms.split.splitInput.value;
+		var split = Math.ceil(parseFloat(totalBill)).toFixed(0) / numPeople;
+		var splitResult = "Each pay $" + split.toFixed(2);
+		document.getElementById('splitResult').innerHTML = splitResult; 
+	}
+</script>
+   	</div>	
+ </body>
+</html>
