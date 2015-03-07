@@ -46,31 +46,9 @@
 <link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.1/jquery.mobile-1.2.1.min.css" />
 <script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
 <script src="http://code.jquery.com/mobile/1.2.1/jquery.mobile-1.2.1.min.js"></script>
-<script type="application/javascript">
-  function draw() {
-    var ctx = document.getElementById('logo').getContext('2d');
-    for (var i = 0; i < 9; i++){
-      ctx.lineWidth = 1+i;
-      ctx.beginPath();
-      ctx.moveTo(2+i*12,5);
-      ctx.lineTo(2+i*12,25);
-      ctx.stroke();
-    }
-    ctx.font = "12pt Helvetica";
-    ctx.fillText("...tippy", 50, 42);
-  }
-  
-  <!-- 
-	function SelectTheText(fieldName){ 
-		fieldName.focus(); 
-		fieldName.select(); 
-		} 
-	--> 
-  
-  </script>
- </head>
+</head>
 
- <body id="textarea" onload="draw();">
+ <body id="textarea">
  <div data-role="page">
   <div id="header"></div>
    
@@ -116,7 +94,9 @@
 			} else { 	
 			var tip = document.forms.tipper.tipInput.value;
 			var bill = document.forms.tipper.billInput.value;
-			tipAmount = parseFloat(bill) * (parseFloat(tip)/100);
+			var tax = 1.0825
+			var preTax = (parseFloat(bill)/tax);
+			tipAmount = parseFloat(preTax) * (parseFloat(tip)/100);
 			totalBill = parseFloat(bill) + tipAmount;
 			result = "<p id='pay'>Pay <strong>$";
 			result += Math.ceil(parseFloat(totalBill)).toFixed(0) + "</strong></p>";
