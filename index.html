@@ -1,12 +1,11 @@
 <html>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1">
  <head>
  <style>
   	html, body { 
  		font-size: 22pt;
  		color: #1b1b1b; 
- 		margin: 0 auto;
+ 		margin: 0 10px 0 10px;
  	}	
  	p {
 	 	font-size: .9em;
@@ -15,7 +14,7 @@
 		height: 12pt;
 		background-color: #242323;
 		position: relative;
-		margin: -8px -10px 2% -10px;
+		margin: -8px -10px 2pt -10px;
 	}
 	#textarea {
 		position: relative;
@@ -29,49 +28,36 @@
 	#logo {
 		position: relative;
 		float: right;
-		margin-right: 0.5%;
+		margin-right: 25px;
 	}
  	strong { font-size: 1.1em; }
  	form {
 	 	margin-top: 10pt;
-		padding: 2% 5%;
  	}
  	select, input, button {
 	   display: block;
 	   margin-bottom: .2em;
 	   font-size: 100%;
 	}
-	
-	@media screen and (min-width: 768px){
-		#textarea {
-			max-width: 80%;
-		}
-	}
  </style>
+  
  <title>Give Good Tips with ...tippy!</title>
- 
- <!-- 
- 	Tippy is an all-in-one mobile app using html, javascript, and jQuery mobile. 
- 	All the styling and code are on this single page.
- 	You are authorized to use this for educational purposes.
- 	By Sable Cantus
- -->
- 
+ <meta name="viewport" content="width=device-width, initial-scale=1"> 
 <link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.1/jquery.mobile-1.2.1.min.css" />
 <script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
 <script src="http://code.jquery.com/mobile/1.2.1/jquery.mobile-1.2.1.min.js"></script>
 <script type="application/javascript">
   function draw() {
     var ctx = document.getElementById('logo').getContext('2d');
-    for (var i = 0; i < 8; i++){
+    for (var i = 0; i < 9; i++){
       ctx.lineWidth = 1+i;
       ctx.beginPath();
       ctx.moveTo(2+i*12,5);
       ctx.lineTo(2+i*12,25);
       ctx.stroke();
     }
-    //ctx.font = "12pt Helvetica";
-    //ctx.fillText("...:)", 77, 42);
+    ctx.font = "12pt Helvetica";
+    ctx.fillText("...tippy", 50, 42);
   }
   
   <!-- 
@@ -88,7 +74,7 @@
  <div data-role="page">
   <div id="header"></div>
    
-    <div id="canvas"><canvas id="logo" width="100" height="65"></canvas></div>
+<!--    <div id="canvas"><canvas id="logo" width="100" height="65"></canvas></div>     -->
    <form name="tipper">
 	How much is the bill?
 	<br />
