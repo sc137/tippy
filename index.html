@@ -101,7 +101,7 @@
 			} else { 	
 			var tip = document.forms.tipper.tipInput.value;
 			var bill = document.forms.tipper.billInput.value;
-			var tax = 1.0825
+			var tax = 1.08
 			var preTax = (parseFloat(bill)/tax);
 			tipAmount = parseFloat(preTax) * (parseFloat(tip)/100);
 			totalBill = parseFloat(bill) + tipAmount;
