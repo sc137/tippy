@@ -24,6 +24,9 @@
 		font-weight: 400;
 		font-size: 1.2em;
 		text-align: center;
+		padding: .5em 0;
+		border: thin black 1px;
+		background-color: rgba(244, 252, 130, 0.67);
 	}
 	#logo {
 		position: relative;
@@ -65,10 +68,13 @@
 	<br />
 	<input type="number" name="billInput" placeholder="enter bill amount" onclick="document.forms.tipper.billInput.value=''">
 
-	What % for the tip?
+	What % for the tip? <em style="font-size: .8em">(select 0 to split)</em>
 	<br />
-	<input type="range" name="tipInput"  value="20" min="10" max="30" data-highlight="true" onclick="SelectTheText(document.forms.tipper.tipInput);">
-	<input type="button" value="Tip Big!" onclick="tipBig();">
+	<input type="range" name="tipInput" value="20" min="0" max="30" data-highlight="true" onchange="CheckValue();">
+	
+	<input id="changeifsplit" type="button" value="" onclick="tipBig();">
+	
+
 </form>
    </form>
    <a name="result"></a>
@@ -79,21 +85,52 @@
    <form name="split">
    	
    	<div data-role="fieldcontain">
-   	<label for="splitInput">Split the bill?</label>
+   	<label form="splitInput">Slide to split the bill</label>
    	<br />
    	<input type="range" name="splitInput" value="1" min="1" max="25" onchange="splitBill();" data-highlight="true"></div>
-   <p id="splitResult"></p>
+   <p id="splitResult"><br /></p>
    <br />
    <br />
-   <br />
-   <br />
-   <br />
+
    </form>
+</div>
+
+<div id='reload' style="display: none;">
+	<input type="button" value="Click to Reset" onClick="window.location.reload()">
 </div>
 
 <script>
 	var tip = document.forms.tipper.tipInput.value;
 	var bill = document.forms.tipper.billInput.value;
+	var button_name = "Tip Big!"
+	
+	document.getElementById('changeifsplit').value = button_name;
+	
+	function CheckValue() {
+		// console.log('checking for 0');
+		
+		if ( document.forms.tipper.tipInput.value == 0 ) {
+			
+			/* hide the button */
+			document.getElementById('changeifsplit').style.display="none";
+			
+			/* hide the tip value results*/
+			document.getElementById('result').style.display="none";
+			
+			/* Jump straight to splitting without tapping Tip Big! */
+			tipBig();
+			
+			/* check work */
+			// console.log('splitting');
+		}
+		
+		/*
+		else {
+			console.log('not 0');
+			console.log(document.forms.tipper.tipInput.value);
+		}
+		*/
+	}
 
 	function tipBig() {
 		if ( isNaN(document.forms.tipper.billInput.value) || !document.forms.tipper.billInput.value ) { 
@@ -105,16 +142,18 @@
 			var preTax = (parseFloat(bill)/tax);
 			tipAmount = parseFloat(preTax) * (parseFloat(tip)/100);
 			totalBill = parseFloat(bill) + tipAmount;
-			result = "<p id='pay'>Pay <strong>$";
+			result = "<p id='pay'>Cash: Pay <strong>$";
 			result += Math.ceil(parseFloat(totalBill)).toFixed(0) + "</strong></p>";
+			result += "Your bill is: " + bill + " </br>";
 			result += "The tip is $";
 			result += parseFloat(tipAmount).toFixed(2);
-			result += "<br />The bill is $";
+			result += "<br />The total after tip is $";
 			result += parseFloat(totalBill).toFixed(2);
 
 			document.getElementById('result').innerHTML = result;
 			document.getElementById('split').style.display="inline";
-			console.log(tipAmount, totalBill);
+			document.getElementById('reload').style.display="inline";
+			// console.log(tipAmount, totalBill);
 			}
 			jumpToResult();
 		}
