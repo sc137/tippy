@@ -61,8 +61,6 @@
  <body id="textarea">
  <div data-role="page">
   <div id="header"></div>
-   
-<!--    <div id="canvas"><canvas id="logo" width="100" height="65"></canvas></div>     -->
    <form name="tipper">
 	How much is the bill?
 	<br />
@@ -93,7 +91,7 @@
 </div>
 
 <div id='reload' style="display: none;">
-	<input type="button" value="Click to Reset" onClick="window.location.reload()">
+	<input type="button" value="Click to Reset" onClick="reloadTippy();">
 </div>
 
 <script>
@@ -103,30 +101,16 @@
 	
 	document.getElementById('changeifsplit').value = button_name;
 	
+	function reloadTippy() {
+		window.location.reload('index.html');
+	}
+	
 	function CheckValue() {
-		// console.log('checking for 0');
-		
 		if ( document.forms.tipper.tipInput.value == 0 ) {
-			
-			/* hide the button */
-			document.getElementById('changeifsplit').style.display="none";
-			
-			/* hide the tip value results*/
-			document.getElementById('result').style.display="none";
-			
-			/* Jump straight to splitting without tapping Tip Big! */
-			tipBig();
-			
-			/* check work */
-			// console.log('splitting');
+			loadSplit();
+		} else if ( document.forms.tipper.tipInput.value > 0 ){
+			unLoadSplit();
 		}
-		
-		/*
-		else {
-			console.log('not 0');
-			console.log(document.forms.tipper.tipInput.value);
-		}
-		*/
 	}
 
 	function tipBig() {
@@ -150,7 +134,6 @@
 			document.getElementById('result').innerHTML = result;
 			document.getElementById('split').style.display="inline";
 			document.getElementById('reload').style.display="inline";
-			// console.log(tipAmount, totalBill);
 			}
 			jumpToResult();
 		}
@@ -158,21 +141,36 @@
 	function jumpToResult() {
 		window.location.hash='#result';
 	}
+	
+	function loadSplit() {
+		document.getElementById('result').style.display="none";
+		document.getElementById('split').style.display="inline";
+		document.getElementById('reload').style.display="inline";
+	}
+	
+	function unLoadSplit() {
+		document.getElementById('result').style.display="inline";
+		document.getElementById('split').style.display="none";
+		document.getElementById('reload').style.display="none";
+	}
 		
 	function splitBill() {
+		var tip = document.forms.tipper.tipInput.value;
+		var bill = document.forms.tipper.billInput.value;
+		var tax = 1.08
+		var preTax = (parseFloat(bill)/tax);
+		tipAmount = parseFloat(preTax) * (parseFloat(tip)/100);
+		totalBill = parseFloat(bill) + tipAmount;
 		var numPeople = document.forms.split.splitInput.value;
 		var split = Math.ceil(parseFloat(totalBill)).toFixed(0) / numPeople;
 		var splitBill = parseFloat(document.forms.tipper.billInput.value).toFixed(2) / numPeople;
 		var splitTip = parseFloat(tipAmount).toFixed(2) / numPeople;
 		var splitTotal = parseFloat(totalBill).toFixed(2) / numPeople;
-		
 		var splitResult = "Cash: Each pay $" + split.toFixed(0) + "<br />";
-		
-		splitResult += "Split bill is $" + parseFloat(splitBill).toFixed(2) + " per person" + "<br />";
-		splitResult += "Split tip is $" + parseFloat(splitTip).toFixed(2) + " per person" + "<br />";
-		splitResult += "Split total is $" + parseFloat(splitTotal).toFixed(2) + " per person";
-		
-		document.getElementById('splitResult').innerHTML = splitResult; 
+		splitResult += "Bill: $" + parseFloat(splitBill).toFixed(2) + " per person" + "<br />";
+		splitResult += "<span class='noTip' style='display: inline'>Tip: $" + parseFloat(splitTip).toFixed(2) + " per person" + "</span><br />";
+		splitResult += "<span class='noTip' style='display: inline'>Total: $" + parseFloat(splitTotal).toFixed(2) + " per person</span>";
+		document.getElementById('splitResult').innerHTML = splitResult;
 	}
 </script>
    	</div>	

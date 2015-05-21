@@ -1,6 +1,7 @@
 CACHE MANIFEST
+# ver .03.02 - cleaned up split functions, some refactoring
 # ver .03.01 - added split bill info for CC (laurie update)
-# ver .03 2015-05-20 - added slide to split, cleaned up text, added a reset page button
+# ver .03.00- added slide to split, cleaned up text, added a reset page button
 # ver .02 - added apple touch icons and favicon
 index.html
 http://code.jquery.com/mobile/1.2.1/jquery.mobile-1.2.1.min.css
