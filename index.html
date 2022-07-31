@@ -1,180 +1,63 @@
-<html manifest="offline.appcache">
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black">
- <head>
- <style>
-  	html, body { 
- 		font-size: 22pt;
- 		color: #1b1b1b; 
- 		margin: 0 10px 0 10px;
- 	}	
- 	p {
-	 	font-size: .9em;
- 	}
-	#header {
-		height: 12pt;
-		background-color: #242323;
-		position: relative;
-		margin: -8px -10px 2pt -10px;
-	}
-	#textarea {
-		position: relative;
-		width: 100%;
-		}
-	#pay {
-		font-weight: 400;
-		font-size: 1.2em;
-		text-align: center;
-		padding: .5em 0;
-		border: thin black 1px;
-		background-color: rgba(244, 252, 130, 0.67);
-	}
-	#logo {
-		position: relative;
-		float: right;
-		margin-right: 25px;
-	}
- 	strong { font-size: 1.1em; }
- 	form {
-	 	margin-top: 10pt;
- 	}
- 	select, input, button {
-	   display: block;
-	   margin-bottom: .2em;
-	   font-size: 100%;
-	}
- </style>
-  
- <title>Tippy!</title>
- <meta name="viewport" content="width=device-width, initial-scale=1"> 
-<link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.1/jquery.mobile-1.2.1.min.css" />
-<script src="http://code.jquery.com/jquery-1.8.3.min.js"></script>
-<script src="http://code.jquery.com/mobile/1.2.1/jquery.mobile-1.2.1.min.js"></script>
-<link rel="icon" type="image/ico" href="images/favicon.ico"/>
-<link href="images/Icon-Small@2x.png" rel="apple-touch-icon" />
-<link href="images/Icon-76.png" rel="apple-touch-icon" sizes="76x76" />
-<link href="images/Icon-60@2x.png" rel="apple-touch-icon" sizes="120x120" />
-<link href="images/Icon-76@2x.png" rel="apple-touch-icon" sizes="152x152" />
-<link href="images/Icon-60@3x.png" rel="apple-touch-icon" sizes="180x180" />
+<!doctype html>
+<html lang="en" manifest="offline.appcache">
+<head>
+	<meta charset="UTF-8">
+  	<meta name="viewport" content="width=device-width">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<title>Tippy!</title>
 
+	<!-- updated jquery calls -->
+	<link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+	<script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+	<script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+
+	<!-- call custom after jquery in order to override -->
+	<link rel="stylesheet" href="style.css">
+	<script src="script.js" defer></script>
+
+	<link rel="icon" type="image/ico" href="images/favicon.ico"/>
+	<link href="images/Icon-Small@2x.png" rel="apple-touch-icon" />
+	<link href="images/Icon-76.png" rel="apple-touch-icon" sizes="76x76" />
+	<link href="images/Icon-60@2x.png" rel="apple-touch-icon" sizes="120x120" />
+	<link href="images/Icon-76@2x.png" rel="apple-touch-icon" sizes="152x152" />
+	<link href="images/Icon-60@3x.png" rel="apple-touch-icon" sizes="180x180" />
 </head>
 
- <body id="textarea">
- <div data-role="page">
-  <div id="header"></div>
-   <form name="tipper">
-	How much is the bill?
-	<br />
-	<input type="number" name="billInput" placeholder="enter bill amount" onclick="document.forms.tipper.billInput.value=''">
-
-	What % for the tip? <em style="font-size: .8em">(select 0 to split)</em>
-	<br />
-	<input type="range" name="tipInput" value="20" min="0" max="30" data-highlight="true" onchange="CheckValue();">
-	
-	<input id="changeifsplit" type="button" value="" onclick="tipBig();">
-	
-
-</form>
-   </form>
-   <a name="result"></a>
-   <p id="result"></p>
-   
-<div id="split" style="display: none;">
-   <hr />
-   <form name="split">
-   	
-   	<div data-role="fieldcontain">
-   	<label form="splitInput">Slide to split the bill</label>
-   	<br />
-   	<input type="range" name="splitInput" value="1" min="1" max="25" onchange="splitBill();" data-highlight="true"></div>
-   <p id="splitResult"><br /></p>
-   </form>
-</div>
-
-<div id='reload' style="display: none;">
-	<input type="button" value="Click to Reset" onClick="reloadTippy();">
-</div>
-
-<script>
-	var tip = document.forms.tipper.tipInput.value;
-	var bill = document.forms.tipper.billInput.value;
-	var button_name = "Tip Big!"
-	
-	document.getElementById('changeifsplit').value = button_name;
-	
-	function reloadTippy() {
-		window.location.reload('index.html');
-	}
-	
-	function CheckValue() {
-		if ( document.forms.tipper.tipInput.value == 0 ) {
-			loadSplit();
-		} else if ( document.forms.tipper.tipInput.value > 0 ){
-			unLoadSplit();
-		}
-	}
-
-	function tipBig() {
-		if ( isNaN(document.forms.tipper.billInput.value) || !document.forms.tipper.billInput.value ) { 
-			alert("Please enter the bill amount."); 
-			} else { 	
-			var tip = document.forms.tipper.tipInput.value;
-			var bill = document.forms.tipper.billInput.value;
-			var tax = 1.08
-			var preTax = (parseFloat(bill)/tax);
-			tipAmount = parseFloat(preTax) * (parseFloat(tip)/100);
-			totalBill = parseFloat(bill) + tipAmount;
-			result = "<p id='pay'>Cash: Pay <strong>$";
-			result += Math.ceil(parseFloat(totalBill)).toFixed(0) + "</strong></p>";
-			result += "Your bill is: $" + bill + " </br>";
-			result += "The tip is $";
-			result += parseFloat(tipAmount).toFixed(2);
-			result += "<br />The total after tip is $";
-			result += parseFloat(totalBill).toFixed(2);
-
-			document.getElementById('result').innerHTML = result;
-			document.getElementById('split').style.display="inline";
-			document.getElementById('reload').style.display="inline";
-			}
-			jumpToResult();
-		}
-	
-	function jumpToResult() {
-		window.location.hash='#result';
-	}
-	
-	function loadSplit() {
-		document.getElementById('result').style.display="none";
-		document.getElementById('split').style.display="inline";
-		document.getElementById('reload').style.display="inline";
-	}
-	
-	function unLoadSplit() {
-		document.getElementById('result').style.display="inline";
-		document.getElementById('split').style.display="none";
-		document.getElementById('reload').style.display="none";
-	}
-		
-	function splitBill() {
-		var tip = document.forms.tipper.tipInput.value;
-		var bill = document.forms.tipper.billInput.value;
-		var tax = 1.08
-		var preTax = (parseFloat(bill)/tax);
-		tipAmount = parseFloat(preTax) * (parseFloat(tip)/100);
-		totalBill = parseFloat(bill) + tipAmount;
-		var numPeople = document.forms.split.splitInput.value;
-		var split = Math.ceil(parseFloat(totalBill)).toFixed(0) / numPeople;
-		var splitBill = parseFloat(document.forms.tipper.billInput.value).toFixed(2) / numPeople;
-		var splitTip = parseFloat(tipAmount).toFixed(2) / numPeople;
-		var splitTotal = parseFloat(totalBill).toFixed(2) / numPeople;
-		var splitResult = "Cash: Each pay $" + split.toFixed(0) + "<br />";
-		splitResult += "Bill: $" + parseFloat(splitBill).toFixed(2) + " per person" + "<br />";
-		splitResult += "<span class='noTip' style='display: inline'>Tip: $" + parseFloat(splitTip).toFixed(2) + " per person" + "</span><br />";
-		splitResult += "<span class='noTip' style='display: inline'>Total: $" + parseFloat(splitTotal).toFixed(2) + " per person</span>";
-		document.getElementById('splitResult').innerHTML = splitResult;
-	}
-</script>
-   	</div>	
- </body>
+<body>
+	<main>
+		<div data-role="page">
+		<div id="tipper">
+			<h1>How much is the bill?</h1>
+			<form name="tipper">
+				<input type="number" name="billInput" placeholder="enter bill amount" onclick="document.forms.tipper.billInput.value=''">
+				<p>What % for the tip? <em style="font-size: .8em">(select 0 to split)</em></p>
+				<input type="range" name="tipInput" value="20" min="0" max="30" data-highlight="true" onchange="CheckValue();">
+				<input id="changeifsplit" type="button" value="" onclick="tipBig();">
+			</form>
+		</div>
+		<a name="result"></a>
+		<p class="boxed" id="result"></p>
+		<div id="split">
+			<form name="split">
+				<div data-role="ui-field-contain">
+				<p>
+					<label form="splitInput"><i>Slide to split the bill</i></label>
+				</p>
+				<input type="range" name="splitInput" value="1" min="1" max="6" onchange="splitBill();" data-highlight="true"></div>
+				<p id="splitResult"></p>
+			</form>
+		</div>
+		<div id="reload">
+			<input type="button" value="Start Over" onClick="reloadTippy();">
+		</div>
+	</main>
+	<footer>
+		<small>
+			<p>&copy;2022 
+				<a href="https://cantus.us/" target="__blank">Sable Cantus</a>. 
+				Tips are calculated pre-tax.</p>
+		</small>
+	</footer>
+</body>
 </html>
