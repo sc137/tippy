@@ -1,8 +1,9 @@
 <!doctype html>
 <html lang="en" manifest="offline.appcache">
+
 <head>
 	<meta charset="UTF-8">
-  	<meta name="viewport" content="width=device-width">
+	<meta name="viewport" content="width=device-width">
 	<meta name="apple-mobile-web-app-capable" content="yes">
 	<meta name="apple-mobile-web-app-status-bar-style" content="black">
 	<title>Tippy!</title>
@@ -13,10 +14,10 @@
 	<script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
 
 	<!-- call custom after jquery in order to override -->
-	<link rel="stylesheet" href="style.css">
+	<link rel="stylesheet" href="styles.css">
 	<script src="script.js" defer></script>
 
-	<link rel="icon" type="image/ico" href="images/favicon.ico"/>
+	<link rel="icon" type="image/ico" href="images/favicon.ico" />
 	<link href="images/Icon-Small@2x.png" rel="apple-touch-icon" />
 	<link href="images/Icon-76.png" rel="apple-touch-icon" sizes="76x76" />
 	<link href="images/Icon-60@2x.png" rel="apple-touch-icon" sizes="120x120" />
@@ -27,37 +28,44 @@
 <body>
 	<main>
 		<div data-role="page">
-		<div id="tipper">
-			<h1>How much is the bill?</h1>
-			<form name="tipper">
-				<input type="number" name="billInput" placeholder="enter bill amount" onclick="document.forms.tipper.billInput.value=''">
-				<p>What % for the tip? <em style="font-size: .8em">(select 0 to split)</em></p>
-				<input type="range" name="tipInput" value="20" min="0" max="30" data-highlight="true" onchange="CheckValue();">
-				<input id="changeifsplit" type="button" value="" onclick="tipBig();">
-			</form>
-		</div>
-		<a name="result"></a>
-		<p class="boxed" id="result"></p>
-		<div id="split">
-			<form name="split">
-				<div data-role="ui-field-contain">
-				<p>
-					<label form="splitInput"><i>Slide to split the bill</i></label>
-				</p>
-				<input type="range" name="splitInput" value="1" min="1" max="6" onchange="splitBill();" data-highlight="true"></div>
-				<p id="splitResult"></p>
-			</form>
-		</div>
-		<div id="reload">
-			<input type="button" value="Start Over" onClick="reloadTippy();">
-		</div>
+			<div id="tipper">
+				<h1>How much?</h1>
+				<form name="tipper">
+					<input type="number" name="billInput" placeholder="enter bill amount"
+						onclick="document.forms.tipper.billInput.value=''">
+					<p>What % for the tip? <em style="font-size: .8em">(select 0 to split)</em></p>
+					<input class="bigger" type="range" name="tipInput" value="20" min="0" max="30" data-highlight="true"
+						onchange="CheckValue();">
+					<br>
+					<input id="changeifsplit" type="button" value="" onclick="tipBig();">
+				</form>
+			</div>
+			<a name="result"></a>
+			<p class="boxed" id="result"></p>
+			<div id="split">
+				<form name="split">
+					<div data-role="ui-field-contain">
+						<p>
+							<label form="splitInput"><i>Slide to split the bill</i></label>
+						</p>
+						<input class="bigger" type="range" name="splitInput" value="1" min="1" max="6"
+							onchange="splitBill();" data-highlight="true">
+					</div>
+					<p id="splitResult"></p>
+				</form>
+			</div>
+			<div id="reload">
+				<input type="button" value="Start Over" onClick="reloadTippy();">
+			</div>
 	</main>
 	<footer>
 		<small>
-			<p>&copy;2022 
-				<a href="https://cantus.us/" target="__blank">Sable Cantus</a>. 
-				Tips are calculated pre-tax.</p>
+			<p>&copy;2022
+				<a href="https://cantus.us/" target="__blank">Sable Cantus</a>.
+				Tips are calculated pre-tax.
+			</p>
 		</small>
 	</footer>
 </body>
+
 </html>

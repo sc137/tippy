@@ -28,7 +28,8 @@ function tipBig() {
         totalBill = parseFloat(bill) + tipAmount;
         result = "<p id='pay'>Cash Total: <strong>$";
         result += Math.ceil(parseFloat(totalBill)).toFixed(0) + "</strong></p>";
-        result += "Bill details:<br>";
+        result += "Bill details<br>";
+        result += "-------------<br>";
         result += "Your bill is: $" + bill + " <br>";
         result += "The tip is: $";
         result += parseFloat(tipAmount).toFixed(2);
