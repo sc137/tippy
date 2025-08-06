@@ -4,7 +4,22 @@ var button_name = "Tip Big!"
 
 document.getElementById('changeifsplit').value = button_name;
 
+// Add event listener for Enter key press on the form
+document.addEventListener('DOMContentLoaded', function() {
+    // Set current year in footer
+    document.getElementById('current-year').textContent = new Date().getFullYear();
+    
+    document.forms.tipper.addEventListener('keydown', function(event) {
+        if (event.key === 'Enter') {
+            event.preventDefault(); // Prevent default form submission
+            tipBig();
+        }
+    });
+});
+
 function reloadTippy() {
+    // Restore top margin before reloading
+    document.body.classList.remove('no-top-margin');
     window.location.reload('index.html');
 }
 
@@ -63,6 +78,10 @@ function unLoadSplit() {
 }
     
 function splitBill() {
+    // Remove top margin when showing split results
+    document.body.classList.add('no-top-margin');
+    document.querySelector('footer').style.display = "none";
+    
     var tip = document.forms.tipper.tipInput.value;
     var bill = document.forms.tipper.billInput.value;
     var tax = 1.0875

@@ -1,12 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
 body {
-    font-size: 18px;
+    font-size: 20px;
     color: #0f0f0fed;
     margin: 25px auto;
     position: relative;
     max-width: 400px;
-    width: 80%;
+    width: 85%;
     background-color: #f9f9f9;
-    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    font-family: "Roboto", sans-serif;
+    font-weight: 600;
+    font-style: normal;
 }
 h1 {
     text-align: center;
@@ -36,10 +40,11 @@ input {
     text-align: center;
 }
 input.ui-slider-input {
-    font-size: 1em;
-    width: 50px;
-    height: 25px;
+    font-size: 0.9em;
+    width: 1.5em;
+    /* height: 1em; */
 }
+
 #pay {
     font-weight: 900;
     font-size: 2em;
@@ -59,6 +64,34 @@ input.ui-slider-input {
 #reload {
     display: none;
 }
-/* .boxed {
-    font-weight: 900;
-} */
+
+/* Green background for input buttons - override jQuery Mobile */
+.ui-input-btn {
+    background-color: #28a746b2 !important;
+    background-image: none !important;
+    color: white !important;
+    border: none !important;
+    border-radius: 5px !important;
+    padding: 10px 20px !important;
+    font-size: 1em !important;
+    cursor: pointer !important;
+    transition: background-color 0.3s ease !important;
+    text-shadow: none !important;
+    box-shadow: none !important;
+}
+
+.ui-input-btn:hover {
+    background-color: #218838 !important;
+    background-image: none !important;
+}
+
+.ui-input-btn:active {
+    background-color: #1e7e34 !important;
+    background-image: none !important;
+}
+
+/* Remove top margin when split results are shown */
+.no-top-margin {
+    margin-top: 0 !important;
+}
+

@@ -29,26 +29,26 @@
 	<main>
 		<div data-role="page">
 			<div id="tipper">
-				<h1>How much?</h1>
+				<h1><img src="images/Icon-76.png" width="30px"> Tippy!</h1>
 				<form name="tipper">
-					<input type="number" name="billInput" placeholder="enter bill amount"
+					<input type="number" name="billInput" placeholder="Enter bill amount" inputmode="numeric"
 						onclick="document.forms.tipper.billInput.value=''">
-					<p>What % for the tip? <em style="font-size: .8em">(select 0 to split)</em></p>
-					<input class="bigger" type="range" name="tipInput" value="20" min="0" max="30" data-highlight="true"
-						onchange="CheckValue();">
+					<p>What % would you like to tip?</p>
+					<input class="bigger" type="range" name="tipInput" value="20" min="0" max="30" data-highlight="true">
 					<br>
 					<input id="changeifsplit" type="button" value="" onclick="tipBig();">
 				</form>
 			</div>
 			<a name="result"></a>
 			<p class="boxed" id="result"></p>
+			<br>
 			<div id="split">
 				<form name="split">
 					<div data-role="ui-field-contain">
-						<p>
-							<label form="splitInput"><i>Slide to split the bill</i></label>
-						</p>
-						<input class="bigger" type="range" name="splitInput" value="1" min="1" max="6"
+						<br>
+						<label form="splitInput"><i>Slide to split the bill</i></label>
+						
+						<input class="bigger" type="range" name="splitInput" value="1" min="1" max="10"
 							onchange="splitBill();" data-highlight="true">
 					</div>
 					<p id="splitResult"></p>
@@ -57,10 +57,11 @@
 			<div id="reload">
 				<input type="button" value="Start Over" onClick="reloadTippy();">
 			</div>
+		</div>
 	</main>
 	<footer>
 		<small>
-			<p>&copy;2022
+			<p>&copy;<span id="current-year"></span>
 				<a href="https://cantus.us/" target="__blank">Sable Cantus</a>.
 				Tips are calculated pre-tax.
 			</p>
