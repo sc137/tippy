@@ -95,3 +95,9 @@ input.ui-slider-input {
     margin-top: 0 !important;
 }
 
+/* Adjust footer for iOS full-screen mode */
+@media (display-mode: standalone) {
+    footer {
+        bottom: 5px;
+    }
+}
