@@ -9,11 +9,11 @@ Save this application to your home screen for easy access.
 
 ## [🚀 View this in your browser](http://sc137.github.io/tippy/)
 
-<img src="images/screenshots/tippy1.png" width="250px">
+<img src="images/screenshots/tippy1.png" width="300px">
 
-<img src="images/screenshots/tippy2.png" width="250px">
+<img src="images/screenshots/tippy2.png" width="300px">
 
-<img src="images/screenshots/tippy3.png" width="250px">
+<img src="images/screenshots/tippy3.png" width="300px">
 
 
 --
