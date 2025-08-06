@@ -34,7 +34,8 @@
 					<input type="number" name="billInput" placeholder="Enter bill amount" inputmode="numeric"
 						onclick="document.forms.tipper.billInput.value=''">
 					<p>What % would you like to tip?</p>
-					<input class="bigger" type="range" name="tipInput" value="20" min="0" max="30" data-highlight="true">
+					<input class="bigger" type="range" name="tipInput" value="20" min="0" max="30" data-highlight="true"
+					onchange="CheckValue();">
 					<br>
 					<input id="changeifsplit" type="button" value="" onclick="tipBig();">
 				</form>

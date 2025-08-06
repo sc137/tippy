@@ -24,8 +24,11 @@ function reloadTippy() {
 }
 
 function CheckValue() {
+    // Slide the tip to 0 in order to split a large bill that has tip included
     if ( document.forms.tipper.tipInput.value == 0 ) {
+        document.forms.split.splitInput.value = 2;
         loadSplit();
+        splitBill();
     } else if ( document.forms.tipper.tipInput.value > 0 ){
         unLoadSplit();
     }
