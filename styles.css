@@ -23,7 +23,7 @@ footer {
     position: fixed;
     font-size: .8em;
     left: 0;
-    bottom: 0;
+    bottom: 10px;
     width: 100%;
     text-align: center;
     font-style: italic;
@@ -98,6 +98,6 @@ input.ui-slider-input {
 /* Adjust footer for iOS full-screen mode */
 @media (display-mode: standalone) {
     footer {
-        bottom: 5px;
+        bottom: 15px;
     }
 }
